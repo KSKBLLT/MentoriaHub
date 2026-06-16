@@ -1,56 +1,25 @@
-import { db, usingSupabase } from "@/lib/db";
-import { enrichOpportunity, resolveProfile } from "@/lib/enrich";
+"use client";
 
-export const dynamic = "force-dynamic";
+import Link from "next/link";
 
-const STATUS_BADGE: Record<string, string> = { qualify: "✅", soon: "🟡", locked: "🔒" };
-
-// Server component: proves the backend end-to-end (eligibility + location + score).
-export default async function Home() {
-  const profile = await resolveProfile(null); // demo student
-  const today = new Date();
-  const saved = await db.listSaved(profile.id);
-  const opportunities = (await db.listOpportunities())
-    .map((o) => enrichOpportunity(profile, o, today, saved))
-    .sort((a, b) => b.score - a.score);
-  const stats = await db.stats();
-
+export default function Welcome() {
   return (
     <main>
-      <h1>Mentoria Hub</h1>
-      <p className="muted">
-        Backend MVP · from eligibility to acceptance · store: <code>{usingSupabase ? "supabase" : "memory"}</code>
-      </p>
-
-      <div className="card">
-        <b>Профиль:</b> {profile.name}, {profile.grade} класс, {profile.region} · English {profile.english_level}
-        <div className="row" style={{ marginTop: 6 }}>
-          {profile.goals.map((g) => (
-            <span className="tag" key={g}>{g}</span>
-          ))}
+      <div className="card" style={{ textAlign: "center", padding: "40px 20px" }}>
+        <h1>Welcome to Mentoria Hub</h1>
+        <p className="muted" style={{ fontSize: 16 }}>
+          Узнай, что тебе подходит. Подготовься. Докажи.
+        </p>
+        <div className="row" style={{ justifyContent: "center", marginTop: 20 }}>
+          <Link href="/onboarding" className="btn lg">Я тут впервые</Link>
+          <Link href="/dashboard" className="btn lg secondary">У меня уже есть аккаунт</Link>
         </div>
       </div>
-
-      <p className="muted">
-        Возможностей: {stats.opportunities} · курсов: {stats.courses} · учеников: {stats.students} ·
-        API: <code>/api/opportunities</code>, <code>/api/stats</code>, <code>/api/recommendations</code>
-      </p>
-
-      <h2>Возможности ({opportunities.length})</h2>
-      {opportunities.map((o) => (
-        <div className="card" key={o.id}>
-          <div className="row">
-            <span>{STATUS_BADGE[o.eligibility.status]}</span>
-            <b>{o.title}</b>
-            <span className="tag">{o.location_badge}</span>
-            <span className="muted">score {o.score}</span>
-          </div>
-          <div className="muted">
-            {o.category} · дедлайн {o.deadline} ·{" "}
-            {[...o.eligibility.met, ...o.eligibility.missing].join(", ") || "без требований"}
-          </div>
-        </div>
-      ))}
+      <div className="grid">
+        <div className="card"><b>🔎 Discover</b><div className="muted">Покажем, на что ты <b>проходишь</b> по условиям — и почему.</div></div>
+        <div className="card"><b>📈 Prepare</b><div className="muted">Проверим готовность и соберём мини-курс под твои пробелы.</div></div>
+        <div className="card"><b>🏅 Prove</b><div className="muted">Выдадим проверяемый сертификат для вуза.</div></div>
+      </div>
     </main>
   );
 }
