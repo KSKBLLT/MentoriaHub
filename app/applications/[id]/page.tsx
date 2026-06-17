@@ -73,7 +73,7 @@ export default function Editor({ params }: { params: Promise<{ id: string }> }) 
           <div className="muted">{words} слов</div>
         </div>
         <div className="row">
-          <button className="btn" disabled={loading || text.trim().length < 5} onClick={analyze}>{loading ? "Анализирую…" : "🧑‍🏫 Разобрать как ментор"}</button>
+          <button className="btn" disabled={loading || text.trim().length < 5} onClick={analyze}>{loading ? "Анализирую…" : "Разобрать как ментор"}</button>
           <button className="btn ghost" onClick={() => persist()}>Сохранить черновик</button>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function Editor({ params }: { params: Promise<{ id: string }> }) 
           {result.fixes?.length > 0 && (
             <div><b className="elig-soon">Что исправить:</b>
               {result.fixes.map((f, i) => (
-                <div className="card" key={i} style={{ background: "#fff7ed" }}>
+                <div className="card" key={i}>
                   {f.before && <div className="muted">было: {f.before}</div>}
                   {f.after && <div className="elig-qualify">стало: {f.after}</div>}
                   <div>{f.why}</div>
@@ -102,8 +102,8 @@ export default function Editor({ params }: { params: Promise<{ id: string }> }) 
               ))}
             </div>
           )}
-          <div className="card" style={{ background: "#eef2ff" }}><b>Вердикт ментора:</b> {result.verdict}</div>
-          <p className="muted">Поправь текст выше и нажми «Разобрать» снова — увидишь, как растёт балл.</p>
+          <div className="card"><b>Вердикт ментора:</b> {result.verdict}</div>
+          <p className="muted">Поправь текст выше и нажми «Разобрать» снова. Так ты увидишь, как растёт балл.</p>
         </div>
       )}
     </main>

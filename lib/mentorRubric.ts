@@ -55,7 +55,7 @@ export function analyzeLetterDeterministic(input: MentorInput): MentorResult {
   if (specificity >= 18) strengths.push("Есть конкретика: цифры и результаты.");
   if (structure >= 18) strengths.push("Хорошая структура: абзацы и логика.");
   if (language >= 18) strengths.push("Достаточный объём и чистый язык.");
-  if (strengths.length === 0) strengths.push("Есть основа — дальше усиливаем.");
+  if (strengths.length === 0) strengths.push("Есть основа. Дальше усиливаем.");
 
   const fixes: MentorFix[] = [];
   if (relevance < 18)
@@ -63,16 +63,16 @@ export function analyzeLetterDeterministic(input: MentorInput): MentorResult {
   if (specificity < 18)
     fixes.push({ why: "Добавь конкретику: цифры, результаты, факты (баллы, места, проекты) вместо общих слов." });
   if (structure < 18)
-    fixes.push({ before: "Один сплошной текст", after: "Вступление → достижения → цель/вывод", why: "Раздели на 3 абзаца с чёткой логикой." });
+    fixes.push({ before: "Один сплошной текст", after: "Вступление, достижения, цель/вывод", why: "Раздели на 3 абзаца с чёткой логикой." });
   if (language < 18)
     fixes.push({ why: "Раскрой мысль подробнее (целься в ~150–250 слов) и убери клише." });
 
   const verdict =
     total >= 80
-      ? "Сильное письмо — готово к подаче с мелкими правками."
+      ? "Сильное письмо. Готово к подаче с мелкими правками."
       : total >= 50
         ? "Неплохо, но под цель стоит усилить конкретику и связь."
-        : `Пока слабо для «${input.target || "этой цели"}» — нужно больше конкретики и связи с целью.`;
+        : `Пока слабо для «${input.target || "этой цели"}». Нужно больше конкретики и связи с целью.`;
 
   return { scores, total, strengths, fixes, verdict, source: "rubric" };
 }

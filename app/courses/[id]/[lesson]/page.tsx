@@ -39,8 +39,8 @@ export default function LessonPage({ params }: { params: Promise<{ id: string; l
       <p className="muted"><Link href={`/courses/${id}`}>← {course.title}</Link></p>
       <h1>{lesson.ord}. {lesson.title}</h1>
       <div className="card"><div style={{ whiteSpace: "pre-wrap" }}>{lesson.content_md}</div></div>
-      <div className="card"><b>🎬 Видео-урок</b><div className="muted" style={{ height: 80, display: "flex", alignItems: "center", justifyContent: "center", background: "#eef0f3", borderRadius: 8 }}>video placeholder</div></div>
-      {lesson.task_md && <div className="card"><b>✍️ Задание:</b> {lesson.task_md}</div>}
+      <div className="card"><b>Видео-урок</b><div className="muted media-placeholder">video placeholder</div></div>
+      {lesson.task_md && <div className="card"><b>Задание:</b> {lesson.task_md}</div>}
 
       {lesson.quiz.length > 0 && (
         <div className="card">
@@ -69,10 +69,10 @@ export default function LessonPage({ params }: { params: Promise<{ id: string; l
       ) : (
         <div className="card col">
           <b className="elig-qualify">Урок засчитан! Правильно: {result.correct}/{lesson.quiz.length}. Прогресс курса: {result.progress}%</b>
-          {result.cert && <b>🏅 Курс завершён — сертификат выдан! <Link href="/portfolio">Открыть портфолио →</Link></b>}
+          {result.cert && <b>Курс завершён, сертификат выдан. <Link href="/portfolio">Открыть портфолио</Link></b>}
           <div className="row">
-            {next ? <button className="btn" onClick={() => { setResult(null); setPicks([]); router.push(`/courses/${id}/${next.id}`); }}>Следующий урок →</button>
-                  : <Link className="btn" href="/dashboard">В кабинет →</Link>}
+            {next ? <button className="btn" onClick={() => { setResult(null); setPicks([]); router.push(`/courses/${id}/${next.id}`); }}>Следующий урок</button>
+                  : <Link className="btn" href="/dashboard">В кабинет</Link>}
           </div>
         </div>
       )}

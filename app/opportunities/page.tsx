@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { api, getProfileId } from "@/lib/client";
 
-const BADGE: Record<string, string> = { qualify: "✅", soon: "🟡", locked: "🔒" };
+const BADGE: Record<string, string> = { qualify: "Ready", soon: "Soon", locked: "Locked" };
 const LABEL: Record<string, string> = { qualify: "Проходишь", soon: "Скоро", locked: "Закрыто" };
 
 type Opp = {
@@ -40,10 +40,10 @@ export default function Catalog() {
     <main>
       <h1>Возможности</h1>
       <div className="row" style={{ marginBottom: 8 }}>
-        {[["all", "Все"], ["online", "🌐 Онлайн"], ["offline", "📍 Оффлайн"]].map(([v, l]) => (
+        {[["all", "Все"], ["online", "Онлайн"], ["offline", "Оффлайн"]].map(([v, l]) => (
           <button key={v} className={`chip ${format === v ? "on" : ""}`} onClick={() => setFormat(v)}>{l}</button>
         ))}
-        <button className={`chip ${near ? "on" : ""}`} onClick={() => setNear((n) => !n)}>📍 Рядом</button>
+        <button className={`chip ${near ? "on" : ""}`} onClick={() => setNear((n) => !n)}>Рядом</button>
       </div>
       {loading && <p className="muted">Загрузка…</p>}
       <div className="grid">
@@ -55,10 +55,10 @@ export default function Catalog() {
             </div>
             <Link href={`/opportunities/${o.id}`}><b>{o.title}</b></Link>
             <div className="muted">{o.org} · {o.category}</div>
-            <div className="row"><span className="tag">{o.location_badge}</span><span className="tag">⏳ {o.deadline}</span></div>
+            <div className="row"><span className="tag">{o.location_badge}</span><span className="tag">deadline {o.deadline}</span></div>
             <div className="muted">{[...o.eligibility.met, ...o.eligibility.missing].join(", ") || "без требований"}</div>
             <button className={`btn ${o.saved ? "ghost" : "secondary"}`} onClick={() => toggleSave(o.id)}>
-              {o.saved ? "✓ Сохранено" : "☆ Сохранить"}
+              {o.saved ? "Сохранено" : "Сохранить"}
             </button>
           </div>
         ))}

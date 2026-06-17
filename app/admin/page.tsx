@@ -31,7 +31,7 @@ export default function Admin() {
         req: { min_grade: Number(f.min_grade) },
       },
     });
-    setMsg(`Добавлено: ${f.title} → видно ученикам сразу`);
+    setMsg(`Добавлено: ${f.title}. Видно ученикам сразу`);
     setF({ ...empty });
     load();
   }
@@ -47,14 +47,14 @@ export default function Admin() {
       <h1>Админка Mentoria</h1>
       {stats && (
         <div className="card">
-          <b>📊 Масштаб платформы</b>
+          <b>Масштаб платформы</b>
           <div className="grid" style={{ marginTop: 8 }}>
             <div className="card">Учеников: <b>{stats.students}</b></div>
             <div className="card">Возможностей: <b>{stats.opportunities}</b></div>
             <div className="card">Курсов: <b>{stats.courses}</b></div>
             <div className="card">Завершений курсов: <b>{stats.completions}</b></div>
           </div>
-          <p className="muted">Добавь возможность ниже — счётчик «возможностей» вырастет, и она сразу появится у учеников (та же БД).</p>
+          <p className="muted">Добавь возможность ниже. Счётчик возможностей вырастет, и она сразу появится у учеников в той же базе.</p>
         </div>
       )}
 
@@ -82,7 +82,7 @@ export default function Admin() {
           <div style={{ flex: 1 }}><label>Дедлайн</label><input value={f.deadline} onChange={(e) => set("deadline", e.target.value)} /></div>
         </div>
         <div><label>Теги (через запятую)</label><input value={f.tags} onChange={(e) => set("tags", e.target.value)} placeholder="coding, ai" /></div>
-        <button className="btn" onClick={create}>Добавить → опубликовать</button>
+        <button className="btn" onClick={create}>Добавить и опубликовать</button>
         {msg && <div className="elig-qualify">{msg}</div>}
       </div>
 

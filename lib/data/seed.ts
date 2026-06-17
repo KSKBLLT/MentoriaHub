@@ -107,7 +107,7 @@ export const OPPORTUNITIES: Opportunity[] = [
   },
   {
     id: "decentrathon-youth",
-    title: "Decentrathon — Youth Track",
+    title: "Decentrathon: Youth Track",
     org: "Astana Hub",
     category: "hackathon",
     direction: "coding",

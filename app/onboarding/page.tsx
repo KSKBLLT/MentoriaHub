@@ -127,7 +127,7 @@ export default function Onboarding() {
       {step === 3 && (
         <div className="card col">
           <h2>Проверим твой уровень?</h2>
-          <p className="muted">Короткая диагностика по темам — 5 вопросов, ~2 минуты. Можно пропустить.</p>
+          <p className="muted">Короткая диагностика по темам: 5 вопросов, около 2 минут. Можно пропустить.</p>
           <div className="row">
             <button className="btn" onClick={() => router.push("/diagnostic")}>Пройти диагностику</button>
             <button className="btn secondary" onClick={() => router.push("/opportunities")}>Пропустить</button>

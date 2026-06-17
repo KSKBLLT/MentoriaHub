@@ -4,7 +4,7 @@ import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api, getProfileId } from "@/lib/client";
 
-const BADGE: Record<string, string> = { qualify: "✅ Проходишь", soon: "🟡 Скоро", locked: "🔒 Закрыто" };
+const BADGE: Record<string, string> = { qualify: "Проходишь", soon: "Скоро", locked: "Закрыто" };
 
 type Opp = {
   id: string; title: string; org: string; description: string; deadline: string; apply_url: string;
@@ -50,14 +50,14 @@ export default function OppDetail({ params }: { params: Promise<{ id: string }> 
     <main>
       <h1>{opp.title}</h1>
       <div className="row"><span className={`elig-${opp.eligibility.status}`}>{BADGE[opp.eligibility.status]}</span>
-        <span className="tag">{opp.location_badge}</span><span className="tag">⏳ {opp.deadline}</span></div>
+        <span className="tag">{opp.location_badge}</span><span className="tag">deadline {opp.deadline}</span></div>
       <div className="card">
         <div className="muted">{opp.org}</div>
         <p>{opp.description}</p>
-        {opp.eligibility.met.length > 0 && <div className="elig-qualify">✓ {opp.eligibility.met.join(", ")}</div>}
-        {opp.eligibility.missing.length > 0 && <div className="elig-soon">✗ {opp.eligibility.missing.join(", ")}</div>}
+        {opp.eligibility.met.length > 0 && <div className="elig-qualify">{opp.eligibility.met.join(", ")}</div>}
+        {opp.eligibility.missing.length > 0 && <div className="elig-soon">{opp.eligibility.missing.join(", ")}</div>}
         <div className="row" style={{ marginTop: 10 }}>
-          <button className={`btn ${opp.saved ? "ghost" : "secondary"}`} onClick={save}>{opp.saved ? "✓ Сохранено" : "☆ Сохранить"}</button>
+          <button className={`btn ${opp.saved ? "ghost" : "secondary"}`} onClick={save}>{opp.saved ? "Сохранено" : "Сохранить"}</button>
           {opp.saved && (
             <select value={opp.saved_status ?? "saved"} onChange={(e) => setStatus(e.target.value)} style={{ width: "auto" }}>
               <option value="saved">Сохранено</option>
@@ -66,8 +66,8 @@ export default function OppDetail({ params }: { params: Promise<{ id: string }> 
               <option value="applied">Подал</option>
             </select>
           )}
-          <a className="btn secondary" href={opp.apply_url} target="_blank">Подать заявку ↗</a>
-          <a className="btn" href={`/applications/new?target=${encodeURIComponent(opp.title)}`}>✍️ Подготовить заявку (AI-ментор)</a>
+          <a className="btn secondary" href={opp.apply_url} target="_blank">Подать заявку</a>
+          <a className="btn" href={`/applications/new?target=${encodeURIComponent(opp.title)}`}>Подготовить заявку</a>
         </div>
       </div>
 
@@ -79,9 +79,9 @@ export default function OppDetail({ params }: { params: Promise<{ id: string }> 
           {readiness.gaps.length > 0 ? (
             <>
               <p className="elig-soon">Пробелы: {readiness.gaps.join(", ")}</p>
-              {suggested.id && <button className="btn" onClick={closeGaps}>Закрыть пробелы → курс «{suggested.title}»</button>}
+              {suggested.id && <button className="btn" onClick={closeGaps}>Закрыть пробелы: курс «{suggested.title}»</button>}
             </>
-          ) : <p className="elig-qualify">Ты готов! 🎉</p>}
+          ) : <p className="elig-qualify">Ты готов.</p>}
         </div>
       )}
     </main>

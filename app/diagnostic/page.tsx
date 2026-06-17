@@ -42,7 +42,7 @@ export default function Diagnostic() {
             <span className="muted">{t.score}%</span>
           </div>
         ))}
-        <button className="btn" onClick={() => router.push("/opportunities")}>К возможностям →</button>
+        <button className="btn" onClick={() => router.push("/opportunities")}>К возможностям</button>
       </main>
     );
   }
@@ -50,7 +50,7 @@ export default function Diagnostic() {
   return (
     <main>
       <h1>Диагностика</h1>
-      <p className="muted">Ответь на вопросы — подберём курс под твои пробелы. Можно <a href="/opportunities">пропустить</a>.</p>
+      <p className="muted">Ответь на вопросы, и мы подберём курс под твои пробелы. Можно <a href="/opportunities">пропустить</a>.</p>
       {sections.map((s) => (
         <div className="card" key={s.topic}>
           <h2>{s.topic}</h2>
