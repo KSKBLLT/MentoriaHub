@@ -26,6 +26,11 @@ export default function Dashboard() {
       <h1>Кабинет — {d.profile.name || "Гость"}</h1>
       <p className="muted">{d.profile.grade} класс · {d.profile.region} · цели: {d.profile.goals.join(", ") || "—"}</p>
 
+      <div className="row">
+        <Link className="btn" href="/roadmap">🗺️ Мой роадмап</Link>
+        <Link className="btn secondary" href="/applications">✍️ Мои заявки (AI-ментор)</Link>
+      </div>
+
       {d.profile.diagnostic_status !== "done" && (
         <div className="card row">
           <span>🎯 Уровень не проверен.</span><Link className="btn" href="/diagnostic">Пройти диагностику (2 мин)</Link>

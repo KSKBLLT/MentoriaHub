@@ -24,3 +24,44 @@ export async function api<T = unknown>(
   });
   return res.json();
 }
+
+// ---- Local persistence (drafts + roadmap outcomes) -------------------------
+export interface Draft {
+  id: string;
+  target: string;
+  type: string;
+  text: string;
+  result?: unknown;
+  updatedAt: number;
+}
+
+function read<T>(key: string, fallback: T): T {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const v = localStorage.getItem(key);
+    return v ? (JSON.parse(v) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+function write(key: string, val: unknown) {
+  if (typeof window !== "undefined") localStorage.setItem(key, JSON.stringify(val));
+}
+
+const draftsKey = () => `mh_apps_${getProfileId()}`;
+export const getDrafts = (): Draft[] => read<Draft[]>(draftsKey(), []);
+export const getDraft = (id: string): Draft | undefined => getDrafts().find((d) => d.id === id);
+export function saveDraft(d: Draft) {
+  const all = getDrafts().filter((x) => x.id !== d.id);
+  all.unshift({ ...d, updatedAt: Date.now() });
+  write(draftsKey(), all);
+}
+export function deleteDraft(id: string) {
+  write(draftsKey(), getDrafts().filter((d) => d.id !== id));
+}
+
+const outcomesKey = () => `mh_roadmap_outcomes_${getProfileId()}`;
+export const getOutcomes = (): Record<string, string> => read(outcomesKey(), {});
+export function setOutcome(stepId: string, outcome: string) {
+  write(outcomesKey(), { ...getOutcomes(), [stepId]: outcome });
+}
