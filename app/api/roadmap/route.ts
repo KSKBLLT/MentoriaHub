@@ -4,6 +4,8 @@ import { evaluateEligibility } from "@/lib/eligibility";
 import { llmJSON } from "@/lib/llm";
 import { planRoadmapDeterministic, type RoadmapContext, type RoadmapStep, type StepStatus } from "@/lib/roadmapPlanner";
 
+export const maxDuration = 60;
+
 // POST /api/roadmap  {profileId, outcomes?} -> adaptive branching plan (AI, deterministic fallback)
 export async function POST(req: Request) {
   const { profileId, outcomes = {} } = await req.json().catch(() => ({}));

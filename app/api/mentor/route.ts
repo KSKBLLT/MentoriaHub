@@ -1,6 +1,8 @@
 import { llmJSON } from "@/lib/llm";
 import { analyzeLetterDeterministic, type MentorResult } from "@/lib/mentorRubric";
 
+export const maxDuration = 60;
+
 // POST /api/mentor  {target, type, text} -> mentor-style analysis (AI, deterministic fallback)
 export async function POST(req: Request) {
   const { target = "", type = "мотивационное письмо", text = "" } = await req.json();
