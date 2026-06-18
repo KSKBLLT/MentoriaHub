@@ -5,8 +5,8 @@ import './GlassSurface.css';
 
 const GlassSurface = ({
   children,
-  width = 200,
-  height = 80,
+  width = /** @type {number | string} */ (200),
+  height = /** @type {number | string} */ (80),
   borderRadius = 20,
   borderWidth = 0.07,
   brightness = 50,

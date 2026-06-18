@@ -45,7 +45,7 @@ function useMousePositionRef(containerRef) {
   return positionRef;
 }
 
-const VariableProximity = forwardRef((props, ref) => {
+const VariableProximity = forwardRef(/** @param {any} props */ (props, ref) => {
   const {
     label,
     fromFontVariationSettings,
