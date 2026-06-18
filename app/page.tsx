@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useRef } from "react";
+import GlassSurface from "./components/GlassSurface";
+import VariableProximity from "./components/VariableProximity";
 
 export default function Welcome() {
+  const heroRef = useRef<HTMLDivElement>(null);
   return (
     <main>
       <div className="workspace-topbar">
@@ -15,16 +19,41 @@ export default function Welcome() {
       </div>
 
       <div className="hero-grid">
-        <section className="card hero-panel">
-          <h1 className="hero-title"><span className="accent">Make learning</span> feel simple</h1>
-          <p className="hero-copy">
-            Узнай, какие возможности подходят именно тебе. Собери план подготовки и покажи прогресс через портфолио.
-          </p>
-          <div className="row hero-actions">
-            <Link href="/onboarding" className="btn lg">Начать</Link>
-            <Link href="/dashboard" className="btn lg secondary">Открыть кабинет</Link>
+        <GlassSurface
+          width="100%"
+          height={360}
+          borderRadius={28}
+          className="hero-glass"
+          backgroundOpacity={0.1}
+          blur={13}
+          displace={1.4}
+          distortionScale={-160}
+          redOffset={4}
+          greenOffset={12}
+          blueOffset={22}
+          saturation={1.4}
+        >
+          <div className="hero-glass-inner" ref={heroRef}>
+            <p className="hero-eyebrow">Discover → Prepare → Prove</p>
+            <h1 className="hero-title hero-variable">
+              <VariableProximity
+                label="WELCOME TO MENTORIA HUB"
+                containerRef={heroRef}
+                radius={130}
+                falloff="gaussian"
+                fromFontVariationSettings="'wght' 420, 'opsz' 12"
+                toFontVariationSettings="'wght' 1000, 'opsz' 40"
+              />
+            </h1>
+            <p className="hero-copy">
+              Узнай, какие возможности подходят именно тебе. Собери план подготовки и покажи прогресс через портфолио.
+            </p>
+            <div className="row hero-actions">
+              <Link href="/onboarding" className="btn lg">Начать</Link>
+              <Link href="/dashboard" className="btn lg secondary">Открыть кабинет</Link>
+            </div>
           </div>
-        </section>
+        </GlassSurface>
 
         <aside className="side-stack">
           <div className="card note-card">

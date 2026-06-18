@@ -1,0 +1,13 @@
+.aurora-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Full-viewport animated background, behind all content */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.55;
+}

@@ -37,7 +37,6 @@ body {
     radial-gradient(circle at 58% 22%, rgb(52 110 210 / 0.2), transparent 34rem),
     linear-gradient(90deg, rgb(2 8 20 / 0.58), rgb(5 14 30 / 0.16) 46%, rgb(2 7 18 / 0.54)),
     linear-gradient(180deg, rgb(3 8 19 / 0.24), rgb(2 7 17 / 0.66)),
-    url("/images/joshua-woroniecki-dyEaBD5uiio-unsplash.jpg") center / cover fixed no-repeat,
     #071126;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
@@ -174,16 +173,19 @@ code {
 .card {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--stroke);
+  border: 1px solid var(--stroke-bright);
   border-radius: var(--radius-md);
   background:
-    linear-gradient(145deg, rgb(34 58 103 / 0.28), rgb(7 17 39 / 0.36)),
-    var(--panel);
+    linear-gradient(145deg, rgb(40 64 116 / 0.22), rgb(7 17 39 / 0.26)),
+    rgb(13 26 55 / 0.18);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.12),
-    0 18px 48px rgb(0 0 0 / 0.22);
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
+    0 0 0 1px rgb(255 255 255 / 0.04) inset,
+    0 1px 0 rgb(255 255 255 / 0.34) inset,
+    0 -1px 0 rgb(255 255 255 / 0.07) inset,
+    0 12px 40px rgb(255 255 255 / 0.05) inset,
+    0 22px 56px rgb(2 8 22 / 0.36);
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.06);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.06);
   padding: 18px;
   margin: 12px 0;
 }
@@ -821,7 +823,6 @@ nav.top .brand {
     background:
       radial-gradient(circle at 70% 10%, rgb(63 105 214 / 0.22), transparent 18rem),
       linear-gradient(180deg, rgb(3 8 19 / 0.22), rgb(2 7 17 / 0.72)),
-      url("/images/joshua-woroniecki-dyEaBD5uiio-unsplash.jpg") center / cover fixed no-repeat,
       #071126;
   }
 
@@ -908,4 +909,72 @@ nav.top .brand {
   nav.top .brand span:last-child {
     display: none;
   }
+}
+
+/* ---- React Bits: Grainient base background ---- */
+.grainient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -4;
+  pointer-events: none;
+}
+
+.grainient-bg .grainient-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- React Bits: Aurora overlay accent ---- */
+.ambient-scene .aurora-container {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+}
+
+/* ---- React Bits: GlassSurface hero ---- */
+.hero-glass {
+  min-height: 330px;
+}
+
+.hero-glass .glass-surface__content {
+  padding: 0;
+}
+
+.hero-glass-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  gap: 14px;
+  padding: clamp(24px, 4vw, 44px);
+}
+
+.hero-eyebrow {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+/* ---- React Bits: VariableProximity headline ---- */
+.hero-variable {
+  margin: 0;
+  max-width: 100%;
+}
+
+.hero-variable .variable-proximity {
+  font-size: clamp(30px, 5vw, 52px);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  background: linear-gradient(120deg, #f7f9ff 18%, #76ddff 60%, #5f83ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
