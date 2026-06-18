@@ -82,7 +82,7 @@ export default function Editor({ params }: { params: Promise<{ id: string }> }) 
         <div className="card col">
           <div className="row" style={{ justifyContent: "space-between" }}>
             <h2 style={{ margin: 0 }}>Разбор · {result.total}/100</h2>
-            <span className="tag">{result.source === "ai" ? "Gemini AI" : "правила"}</span>
+            <span className="tag">{result.source === "ai" ? "AI" : "правила"}</span>
           </div>
           <Bar label="Связь с целью" v={result.scores.relevance} />
           <Bar label="Конкретика" v={result.scores.specificity} />

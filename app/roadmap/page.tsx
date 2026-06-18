@@ -30,7 +30,7 @@ export default function RoadmapPage() {
   return (
     <main>
       <h1>Мой roadmap</h1>
-      <p className="muted">Живой план до поступления ветвится по твоим результатам. Отметь исход шага, и план перестроится. {source && <span className="tag">{source === "ai" ? "Gemini AI" : "правила"}</span>}</p>
+      <p className="muted">Живой план до поступления ветвится по твоим результатам. Отметь исход шага, и план перестроится. {source && <span className="tag">{source === "ai" ? "AI" : "правила"}</span>}</p>
       <button className="btn" onClick={build} disabled={loading}>{loading ? "Строю…" : "↻ Перестроить план"}</button>
 
       <div style={{ marginTop: 12 }}>
