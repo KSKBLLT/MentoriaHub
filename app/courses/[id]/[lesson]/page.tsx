@@ -39,7 +39,7 @@ export default function LessonPage({ params }: { params: Promise<{ id: string; l
       <p className="muted"><Link href={`/courses/${id}`}>← {course.title}</Link></p>
       <h1>{lesson.ord}. {lesson.title}</h1>
       <div className="card"><div style={{ whiteSpace: "pre-wrap" }}>{lesson.content_md}</div></div>
-      <div className="card"><b>Видео-урок</b><div className="muted media-placeholder">video placeholder</div></div>
+      <div className="card"><b>Видео-урок</b><div className="media-placeholder"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.22)" /><path d="M10 8l6 4-6 4V8z" fill="currentColor" /></svg></div></div>
       {lesson.task_md && <div className="card"><b>Задание:</b> {lesson.task_md}</div>}
 
       {lesson.quiz.length > 0 && (

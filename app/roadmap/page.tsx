@@ -36,7 +36,7 @@ export default function RoadmapPage() {
       <div style={{ marginTop: 12 }}>
         {steps.length === 0 && !loading && <p className="muted">Нет шагов. Заполни цели в онбординге и сохрани возможности.</p>}
         {steps.map((s, i) => (
-          <div className="card col" key={s.id} style={firstTodoId === s.id ? { borderColor: "#1a56db", borderWidth: 2 } : undefined}>
+          <div className="card col" key={s.id} style={firstTodoId === s.id ? { borderColor: "var(--accent)", borderWidth: 2 } : undefined}>
             <div className="row" style={{ justifyContent: "space-between" }}>
               <div className="row">
                 <span style={{ fontSize: 20 }}>{STATUS[s.status] ?? "○"}</span>

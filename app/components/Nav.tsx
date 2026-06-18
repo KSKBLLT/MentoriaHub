@@ -15,14 +15,14 @@ import {
 } from "@phosphor-icons/react";
 
 const links = [
-  { href: "/", label: "Home", icon: House },
-  { href: "/opportunities", label: "Discover", icon: Compass },
-  { href: "/roadmap", label: "Roadmap", icon: MapTrifold },
-  { href: "/courses", label: "Courses", icon: Books },
-  { href: "/applications", label: "Applications", icon: Briefcase },
-  { href: "/dashboard", label: "Dashboard", icon: Gauge },
-  { href: "/portfolio", label: "Portfolio", icon: Certificate },
-  { href: "/admin", label: "Admin", icon: ShieldCheck },
+  { href: "/", label: "Главная", icon: House },
+  { href: "/opportunities", label: "Возможности", icon: Compass },
+  { href: "/roadmap", label: "Роадмап", icon: MapTrifold },
+  { href: "/courses", label: "Курсы", icon: Books },
+  { href: "/applications", label: "Заявки", icon: Briefcase },
+  { href: "/dashboard", label: "Кабинет", icon: Gauge },
+  { href: "/portfolio", label: "Портфолио", icon: Certificate },
+  { href: "/admin", label: "Админка", icon: ShieldCheck },
 ];
 
 export default function Nav() {
@@ -48,7 +48,7 @@ export default function Nav() {
         </div>
         <div className="nav-footer">
           <span className="nav-icon"><GearSix size={18} weight="bold" /></span>
-          <span>Ready to code</span>
+          <span>Mentoria Hub</span>
         </div>
       </div>
     </nav>

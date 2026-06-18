@@ -15,6 +15,7 @@ export default function Editor({ params }: { params: Promise<{ id: string }> }) 
   const [text, setText] = useState("");
   const [result, setResult] = useState<MentorResult | null>(null);
   const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
 
   useEffect(() => {
     if (id === "new") {
@@ -40,11 +41,17 @@ export default function Editor({ params }: { params: Promise<{ id: string }> }) 
 
   async function analyze() {
     setLoading(true);
-    const res = await api<MentorResult & { error?: string }>("/api/mentor", { method: "POST", body: { target, type, text } });
-    setLoading(false);
-    if (res.error) { alert(res.error); return; }
-    setResult(res);
-    saveDraft({ id: draftId, target, type, text, result: res, updatedAt: Date.now() });
+    setErr("");
+    try {
+      const res = await api<MentorResult & { error?: string }>("/api/mentor", { method: "POST", body: { target, type, text } });
+      if (res.error) { setErr(res.error); return; }
+      setResult(res);
+      saveDraft({ id: draftId, target, type, text, result: res, updatedAt: Date.now() });
+    } catch {
+      setErr("Не удалось получить разбор. Проверь интернет и попробуй ещё раз.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   const Bar = ({ label, v }: { label: string; v: number }) => (
@@ -67,15 +74,16 @@ export default function Editor({ params }: { params: Promise<{ id: string }> }) 
         <div>
           <div className="row" style={{ justifyContent: "space-between" }}>
             <label>Текст письма</label>
-            <label className="btn ghost" style={{ cursor: "pointer", padding: "4px 10px" }}>Импорт .txt<input type="file" accept=".txt,.md" hidden onChange={importFile} /></label>
+            <label className="btn ghost" style={{ cursor: "pointer", padding: "4px 10px" }} title="Загрузить готовый текст из .txt или .md файла">Импорт .txt<input type="file" accept=".txt,.md" hidden onChange={importFile} /></label>
           </div>
           <textarea rows={12} value={text} onChange={(e) => setText(e.target.value)} placeholder="Вставь или напиши текст письма…" />
-          <div className="muted">{words} слов</div>
+          <div className="muted">{words} слов{words > 0 && words < 80 ? " · совет: для точного разбора напиши 100+ слов" : ""}</div>
         </div>
         <div className="row">
           <button className="btn" disabled={loading || text.trim().length < 5} onClick={analyze}>{loading ? "Анализирую…" : "Разобрать как ментор"}</button>
           <button className="btn ghost" onClick={() => persist()}>Сохранить черновик</button>
         </div>
+        {err && <div className="elig-locked">{err}</div>}
       </div>
 
       {result && (

@@ -66,7 +66,7 @@ export default function OppDetail({ params }: { params: Promise<{ id: string }> 
               <option value="applied">Подал</option>
             </select>
           )}
-          <a className="btn secondary" href={opp.apply_url} target="_blank">Подать заявку</a>
+          <a className="btn secondary" href={opp.apply_url} target="_blank" rel="noopener noreferrer">Подать заявку ↗</a>
           <a className="btn" href={`/applications/new?target=${encodeURIComponent(opp.title)}`}>Подготовить заявку</a>
         </div>
       </div>
